@@ -92,6 +92,9 @@ class InputForm extends Component {
 
   limitNumber(value) {
     if (typeof value === 'string') {
+      if(value === ''){
+        return 0
+      }
       return !isNaN(Number(value)) ? value.replace(/\./g, '') : 0
     } else if (typeof value === 'number') {
       return !isNaN(value) ? String(value).replace(/\./g, '') : 0
