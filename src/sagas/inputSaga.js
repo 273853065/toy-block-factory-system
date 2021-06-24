@@ -8,7 +8,9 @@ export function* createNewOrder(value) {
     yield call(delay, 500);
     return value
   } catch (err) {
-    yield put({type: actionTypes.ERROR});
+    yield put({
+      type: actionTypes.ERROR
+    });
   }
 }
 
@@ -16,9 +18,10 @@ export function* createNewOrderFlow() {
   while (true) {
     let request = yield take(actionTypes.CREATE_NEW_ORDER);
     let response = yield call(createNewOrder, request.value);
+    response.orderId = parseInt(Math.random() * 100000).toString();
     yield put({
       type: actionTypes.UPDATE_ORDER_DETAIL,
       data: response
-    })
+    });
   }
 }

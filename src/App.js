@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Header from './components/Header'
-import OrderDetail from './components/OrderDetail'
-import InputForm from './components/InputForm'
+import Header from './container/Header'
+import OrderReport from './container/OrderReport'
+import InputForm from './container/InputForm'
 
 class App extends Component {
   render() {
@@ -12,7 +12,7 @@ class App extends Component {
         <div className="fix-middle">
           <Header />
           <InputForm />
-          <OrderDetail />
+          <OrderReport />
         </div>
       </div>
     )

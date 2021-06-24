@@ -45,6 +45,10 @@
     margin-top: 10px;
 }
 
+.mt20 {
+    margin-top: 20px;
+}
+
 .mb10 {
     margin-bottom: 10px;
 }
@@ -68,8 +72,20 @@ ul li {
     text-align: left;
 }
 
-.bg-gray {
+.text-right {
+    text-align: right;
+}
+
+.bg-gray-hr {
     height: 1px;
     background-color: #ccc;
     border: none;
+}
+
+.user-info {
+    font-size: 16px;
+}
+
+.total-price-report {
+    font-size: 16px;
 }

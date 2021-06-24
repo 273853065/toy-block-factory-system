@@ -3,7 +3,7 @@ import 'moment/locale/en-gb';
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { createNewOrder } from '../actions';
+import { createNewOrder, updateShowReport } from '../actions';
 import { Form, Input, Button, Row, Col, DatePicker, InputNumber, Alert } from 'antd';
 moment.locale('en-gb');
 
@@ -22,6 +22,7 @@ class InputForm extends Component {
     this.limitNumber = this.limitNumber.bind(this);
   }
   handleReset() {
+    this.props.updateShowReport(false);
     const { setFieldsValue } = this.props.form;
     this.setState({
       showAlert: false,
@@ -43,7 +44,8 @@ class InputForm extends Component {
   }
   handleSubmit(e) {
     e.preventDefault();
-    const { form } = this.props;
+    const { form, updateShowReport, createNewOrder } = this.props;
+    updateShowReport(false);
     this.props.form.validateFields((err, values) => {
       if (!err) {
         let orderInfo = {
@@ -79,7 +81,8 @@ class InputForm extends Component {
             showAlert: false,
             createSuccess: true
           });
-          this.props.createNewOrder(orderInfo);
+          createNewOrder(orderInfo);
+          updateShowReport(true);
         }
       }
     });
@@ -125,9 +128,9 @@ class InputForm extends Component {
             type="success"
             showIcon
           />}
-          <hr className="bg-gray" />
+          <hr className="bg-gray-hr" />
           <h3>User Information</h3>
-          <hr className="bg-gray" />
+          <hr className="bg-gray-hr" />
           <Row gutter={24}>
             <Col span={8}>
               <FormItem label={`Name`}>
@@ -163,9 +166,9 @@ class InputForm extends Component {
               </FormItem>
             </Col>
           </Row>
-          <hr className="bg-gray" />
+          <hr className="bg-gray-hr" />
           <h3>Toy Blocks Production Information</h3>
-          <hr className="bg-gray" />
+          <hr className="bg-gray-hr" />
           <Row gutter={24}>
             <Col span={8}>
               <FormItem label={`Red Square`}>
@@ -333,13 +336,14 @@ class InputForm extends Component {
 
 function mapStateToProps(state) {
   return {
-
+    
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    createNewOrder: bindActionCreators(createNewOrder, dispatch)
+    createNewOrder: bindActionCreators(createNewOrder, dispatch),
+    updateShowReport: bindActionCreators(updateShowReport, dispatch)
   }
 }
 

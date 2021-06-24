@@ -6,3 +6,10 @@ export function createNewOrder(value) {
     value
   }
 }
+
+export function updateShowReport(value) {
+  return {
+    type: actionTypes.UPDATE_SHOW_REPORT,
+    value
+  }
+}
