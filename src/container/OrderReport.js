@@ -9,22 +9,22 @@ const colorShapeColumn = [
   {
     title: '',
     dataIndex: 'colorShape',
-    key: 'colorShape',
+    key: 'colorShape'    
   },
   {
     title: 'Red',
     dataIndex: 'red',
-    key: 'red',
+    key: 'red'
   },
   {
     title: 'Blue',
     dataIndex: 'blue',
-    key: 'blue',
+    key: 'blue'
   },
   {
     title: 'Yellow',
     dataIndex: 'yellow',
-    key: 'yellow',
+    key: 'yellow'
   }
 ];
 
@@ -42,6 +42,9 @@ const quantityColumn = [
 ];
 
 class OrderReport extends Component {
+  amountThusandth(amount) {
+    return amount.toString().replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,");
+  }
   render() {
     const {
       orderDetail: {
@@ -62,22 +65,25 @@ class OrderReport extends Component {
       showReport = false
     } = this.props;
     let colorShapeData = [{
+      key: 1,
       colorShape: 'Square',
-      red: redSquare === 0 ? '-' : redSquare,
-      blue: blueSquare === 0 ? '-' : blueSquare,
-      yellow: yellowSquare === 0 ? '-' : yellowSquare
+      red: redSquare === 0 ? '-' : this.amountThusandth(redSquare),
+      blue: blueSquare === 0 ? '-' : this.amountThusandth(blueSquare),
+      yellow: yellowSquare === 0 ? '-' : this.amountThusandth(yellowSquare)
     },
     {
+      key: 2,
       colorShape: 'Triangle',
-      red: redTriangle === 0 ? '-' : redTriangle,
-      blue: blueTriangle === 0 ? '-' : blueTriangle,
-      yellow: yellowTriangle === 0 ? '-' : yellowTriangle
+      red: redTriangle === 0 ? '-' : this.amountThusandth(redTriangle),
+      blue: blueTriangle === 0 ? '-' : this.amountThusandth(blueTriangle),
+      yellow: yellowTriangle === 0 ? '-' : this.amountThusandth(yellowTriangle)
     },
     {
+      key: 3,
       colorShape: 'Circle',
-      red: redCircle === 0 ? '-' : redCircle,
-      blue: blueCircle === 0 ? '-' : blueCircle,
-      yellow: yellowCircle === 0 ? '-' : yellowCircle
+      red: redCircle === 0 ? '-' : this.amountThusandth(redCircle),
+      blue: blueCircle === 0 ? '-' : this.amountThusandth(blueCircle),
+      yellow: yellowCircle === 0 ? '-' : this.amountThusandth(yellowCircle)
     }];
     let squareCount = redSquare + blueSquare + yellowSquare;
     let triangleCount = redTriangle + blueTriangle + yellowTriangle;
@@ -87,16 +93,19 @@ class OrderReport extends Component {
     let redPaintCount = redSquare + redCircle + redTriangle;
     let totalPrice = squareCount + trianglePrice + ciclePrice + redPaintCount;
     let quantityData = [{
+      key: 1,
       shapeCount: 'Square',
-      qty: squareCount
+      qty: this.amountThusandth(squareCount)
     },
     {
+      key: 2,
       shapeCount: 'Triangle',
-      qty: triangleCount
+      qty: this.amountThusandth(triangleCount)
     },
     {
+      key: 3,
       shapeCount: 'Circle',
-      qty: cicleCount
+      qty: this.amountThusandth(cicleCount)
     }];
     let userInfo = {
       orderId,
@@ -111,13 +120,15 @@ class OrderReport extends Component {
         tableColumn: colorShapeColumn
       },
       totalReport: {
-        squareCount,
-        triangleCount,
-        trianglePrice,
-        cicleCount,
-        ciclePrice,
-        redPaintCount,
-        totalPrice
+        squareCount: this.amountThusandth(squareCount),
+        squarePrice: this.amountThusandth(squareCount),
+        triangleCount: this.amountThusandth(triangleCount),
+        trianglePrice: this.amountThusandth(trianglePrice),
+        cicleCount: this.amountThusandth(cicleCount),
+        ciclePrice: this.amountThusandth(ciclePrice),
+        redPaintCount: this.amountThusandth(redPaintCount),
+        redPaintPrice: this.amountThusandth(redPaintCount),
+        totalPrice: this.amountThusandth(totalPrice)
       }
     };
     let cuttingListReport = {

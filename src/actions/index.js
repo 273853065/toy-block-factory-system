@@ -13,3 +13,10 @@ export function updateShowReport(value) {
     value
   }
 }
+
+export function clearReportData(value) {
+  return {
+    type: actionTypes.CLEAR_REPORT_DATA,
+    value
+  }
+}

@@ -31,6 +31,11 @@ function updateOrderDetail(state = initialState, action) {
         ...state,
         showReport: action.value
       }
+      case actionTypes.CLEAR_REPORT_DATA:
+      return {
+        ...state,
+        orderDetail: action.value
+      }
     default:
       return state
   }

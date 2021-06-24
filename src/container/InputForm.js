@@ -3,7 +3,7 @@ import 'moment/locale/en-gb';
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { createNewOrder, updateShowReport } from '../actions';
+import { createNewOrder, updateShowReport, clearReportData } from '../actions';
 import { Form, Input, Button, Row, Col, DatePicker, InputNumber, Alert } from 'antd';
 moment.locale('en-gb');
 
@@ -23,23 +23,38 @@ class InputForm extends Component {
   }
   handleReset() {
     this.props.updateShowReport(false);
+    this.props.clearReportData({
+        orderId: '',
+        userName: '',
+        address: '',
+        dueDate: null,
+        redSquare: 0,
+        blueSquare: 0,
+        yellowSquare: 0,
+        redTriangle: 0,
+        blueTriangle: 0,
+        yellowTriangle: 0,
+        redCircle: 0,
+        blueCircle: 0,
+        yellowCircle: 0
+      });
     const { setFieldsValue } = this.props.form;
     this.setState({
       showAlert: false,
       createSuccess: false
-    }, function() {
-      setFieldsValue({'userName': ''});
-      setFieldsValue({'address': ''});
-      setFieldsValue({'dueDate': null});
-      setFieldsValue({'redSquare': 0});
-      setFieldsValue({'blueSquare': 0});
-      setFieldsValue({'yellowSquare': 0});
-      setFieldsValue({'redTriangle': 0});
-      setFieldsValue({'blueTriangle': 0});
-      setFieldsValue({'yellowTriangle': 0});
-      setFieldsValue({'redCircle': 0});
-      setFieldsValue({'blueCircle': 0});
-      setFieldsValue({'yellowCircle': 0});
+    }, function () {
+      setFieldsValue({ 'userName': '' });
+      setFieldsValue({ 'address': '' });
+      setFieldsValue({ 'dueDate': null });
+      setFieldsValue({ 'redSquare': 0 });
+      setFieldsValue({ 'blueSquare': 0 });
+      setFieldsValue({ 'yellowSquare': 0 });
+      setFieldsValue({ 'redTriangle': 0 });
+      setFieldsValue({ 'blueTriangle': 0 });
+      setFieldsValue({ 'yellowTriangle': 0 });
+      setFieldsValue({ 'redCircle': 0 });
+      setFieldsValue({ 'blueCircle': 0 });
+      setFieldsValue({ 'yellowCircle': 0 });
     })
   }
   handleSubmit(e) {
@@ -72,12 +87,12 @@ class InputForm extends Component {
           orderInfo.blueCircle +
           orderInfo.yellowCircle;
         if (blockSum === 0) {
-          this.setState({ 
+          this.setState({
             showAlert: true,
             createSuccess: false
           });
         } else {
-          this.setState({ 
+          this.setState({
             showAlert: false,
             createSuccess: true
           });
@@ -95,7 +110,7 @@ class InputForm extends Component {
 
   limitNumber(value) {
     if (typeof value === 'string') {
-      if(value === ''){
+      if (value === '') {
         return 0
       }
       return !isNaN(Number(value)) ? value.replace(/\./g, '') : 0
@@ -105,7 +120,7 @@ class InputForm extends Component {
       return 0
     }
   }
-  
+
 
   render() {
     const { getFieldDecorator } = this.props.form;
@@ -114,7 +129,7 @@ class InputForm extends Component {
     return (
       <div className="text-left">
         <Form ref={this.formRef} className="ant-advanced-search-form" onSubmit={this.handleSubmit}>
-        {showAlert && <Alert
+          {showAlert && <Alert
             className="mb10 mt10"
             message="Error"
             description="The number of toy blocks should not be empty."
@@ -179,6 +194,8 @@ class InputForm extends Component {
                   <InputNumber
                     style={{ width: '100%' }}
                     min={0}
+                    max={100000000000000000000}
+                    step={10}
                     formatter={this.limitNumber}
                     parser={this.limitNumber}
                     placeholder="Please enter red square number"
@@ -195,6 +212,8 @@ class InputForm extends Component {
                   <InputNumber
                     style={{ width: '100%' }}
                     min={0}
+                    max={100000000000000000000}
+                    step={10}
                     formatter={this.limitNumber}
                     parser={this.limitNumber}
                     placeholder="Please enter blue square number"
@@ -211,6 +230,8 @@ class InputForm extends Component {
                   <InputNumber
                     style={{ width: '100%' }}
                     min={0}
+                    max={100000000000000000000}
+                    step={10}
                     formatter={this.limitNumber}
                     parser={this.limitNumber}
                     placeholder="Please enter yellow square number"
@@ -229,6 +250,8 @@ class InputForm extends Component {
                   <InputNumber
                     style={{ width: '100%' }}
                     min={0}
+                    max={100000000000000000000}
+                    step={10}
                     formatter={this.limitNumber}
                     parser={this.limitNumber}
                     placeholder="Please enter red triangle number"
@@ -245,6 +268,8 @@ class InputForm extends Component {
                   <InputNumber
                     style={{ width: '100%' }}
                     min={0}
+                    max={100000000000000000000}
+                    step={10}
                     formatter={this.limitNumber}
                     parser={this.limitNumber}
                     placeholder="Please enter blue triangle number"
@@ -261,6 +286,8 @@ class InputForm extends Component {
                   <InputNumber
                     style={{ width: '100%' }}
                     min={0}
+                    max={100000000000000000000}
+                    step={10}
                     formatter={this.limitNumber}
                     parser={this.limitNumber}
                     placeholder="Please enter yellow triangle number"
@@ -279,6 +306,8 @@ class InputForm extends Component {
                   <InputNumber
                     style={{ width: '100%' }}
                     min={0}
+                    max={100000000000000000000}
+                    step={10}
                     formatter={this.limitNumber}
                     parser={this.limitNumber}
                     placeholder="Please enter red circle number"
@@ -295,6 +324,8 @@ class InputForm extends Component {
                   <InputNumber
                     style={{ width: '100%' }}
                     min={0}
+                    max={100000000000000000000}
+                    step={10}
                     formatter={this.limitNumber}
                     parser={this.limitNumber}
                     placeholder="Please enter blue circle number"
@@ -311,6 +342,8 @@ class InputForm extends Component {
                   <InputNumber
                     style={{ width: '100%' }}
                     min={0}
+                    max={100000000000000000000}
+                    step={10}
                     formatter={this.limitNumber}
                     parser={this.limitNumber}
                     placeholder="Please enter yellow circle number" />
@@ -336,14 +369,15 @@ class InputForm extends Component {
 
 function mapStateToProps(state) {
   return {
-    
+
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     createNewOrder: bindActionCreators(createNewOrder, dispatch),
-    updateShowReport: bindActionCreators(updateShowReport, dispatch)
+    updateShowReport: bindActionCreators(updateShowReport, dispatch),
+    clearReportData: bindActionCreators(clearReportData, dispatch)
   }
 }
 
