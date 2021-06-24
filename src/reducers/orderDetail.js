@@ -6,15 +6,15 @@ const initialState = {
         userName: '',
         address: '',
         dueDate: null,
-        redSquare: 0,
-        blueSquare: 0,
-        yellowSquare: 0,
-        redTriangle: 0,
-        blueTriangle: 0,
-        yellowTriangle: 0,
-        redCircle: 0,
-        blueCircle: 0,
-        yellowCircle: 0
+        redSquare: '',
+        blueSquare: '',
+        yellowSquare: '',
+        redTriangle: '',
+        blueTriangle: '',
+        yellowTriangle: '',
+        redCircle: '',
+        blueCircle: '',
+        yellowCircle: ''
   },
   showReport: false
 };

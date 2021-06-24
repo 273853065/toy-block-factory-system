@@ -21,6 +21,15 @@ class InputForm extends Component {
     this.handleReset = this.handleReset.bind(this);
     this.limitNumber = this.limitNumber.bind(this);
   }
+
+  numberRevert(num) {
+    if(!num){
+      return 0;
+    } else {
+      return num;
+    }
+  }
+
   handleReset() {
     this.props.updateShowReport(false);
     this.props.clearReportData({
@@ -28,15 +37,15 @@ class InputForm extends Component {
         userName: '',
         address: '',
         dueDate: null,
-        redSquare: 0,
-        blueSquare: 0,
-        yellowSquare: 0,
-        redTriangle: 0,
-        blueTriangle: 0,
-        yellowTriangle: 0,
-        redCircle: 0,
-        blueCircle: 0,
-        yellowCircle: 0
+        redSquare: '',
+        blueSquare: '',
+        yellowSquare: '',
+        redTriangle: '',
+        blueTriangle: '',
+        yellowTriangle: '',
+        redCircle: '',
+        blueCircle: '',
+        yellowCircle: ''
       });
     const { setFieldsValue } = this.props.form;
     this.setState({
@@ -46,15 +55,15 @@ class InputForm extends Component {
       setFieldsValue({ 'userName': '' });
       setFieldsValue({ 'address': '' });
       setFieldsValue({ 'dueDate': null });
-      setFieldsValue({ 'redSquare': 0 });
-      setFieldsValue({ 'blueSquare': 0 });
-      setFieldsValue({ 'yellowSquare': 0 });
-      setFieldsValue({ 'redTriangle': 0 });
-      setFieldsValue({ 'blueTriangle': 0 });
-      setFieldsValue({ 'yellowTriangle': 0 });
-      setFieldsValue({ 'redCircle': 0 });
-      setFieldsValue({ 'blueCircle': 0 });
-      setFieldsValue({ 'yellowCircle': 0 });
+      setFieldsValue({ 'redSquare': '' });
+      setFieldsValue({ 'blueSquare': '' });
+      setFieldsValue({ 'yellowSquare': '' });
+      setFieldsValue({ 'redTriangle': '' });
+      setFieldsValue({ 'blueTriangle': '' });
+      setFieldsValue({ 'yellowTriangle': '' });
+      setFieldsValue({ 'redCircle': '' });
+      setFieldsValue({ 'blueCircle': '' });
+      setFieldsValue({ 'yellowCircle': '' });
     })
   }
   handleSubmit(e) {
@@ -67,15 +76,15 @@ class InputForm extends Component {
           userName: form.getFieldValue('userName'),
           address: form.getFieldValue('address'),
           dueDate: moment(form.getFieldValue('dueDate')).format('DD MMM YYYY'),
-          redSquare: form.getFieldValue('redSquare'),
-          blueSquare: form.getFieldValue('blueSquare'),
-          yellowSquare: form.getFieldValue('yellowSquare'),
-          redTriangle: form.getFieldValue('redTriangle'),
-          blueTriangle: form.getFieldValue('blueTriangle'),
-          yellowTriangle: form.getFieldValue('yellowTriangle'),
-          redCircle: form.getFieldValue('redCircle'),
-          blueCircle: form.getFieldValue('blueCircle'),
-          yellowCircle: form.getFieldValue('yellowCircle')
+          redSquare: this.numberRevert(form.getFieldValue('redSquare')),
+          blueSquare: this.numberRevert(form.getFieldValue('blueSquare')),
+          yellowSquare: this.numberRevert(form.getFieldValue('yellowSquare')),
+          redTriangle: this.numberRevert(form.getFieldValue('redTriangle')),
+          blueTriangle: this.numberRevert(form.getFieldValue('blueTriangle')),
+          yellowTriangle: this.numberRevert(form.getFieldValue('yellowTriangle')),
+          redCircle: this.numberRevert(form.getFieldValue('redCircle')),
+          blueCircle: this.numberRevert(form.getFieldValue('blueCircle')),
+          yellowCircle: this.numberRevert(form.getFieldValue('yellowCircle'))
         };
         let blockSum = orderInfo.redSquare +
           orderInfo.blueSquare +
@@ -110,9 +119,6 @@ class InputForm extends Component {
 
   limitNumber(value) {
     if (typeof value === 'string') {
-      if (value === '') {
-        return 0
-      }
       return !isNaN(Number(value)) ? value.replace(/\./g, '') : 0
     } else if (typeof value === 'number') {
       return !isNaN(value) ? String(value).replace(/\./g, '') : 0
@@ -188,8 +194,7 @@ class InputForm extends Component {
             <Col span={8}>
               <FormItem label={`Red Square`}>
                 {getFieldDecorator('redSquare', {
-                  rules: [],
-                  initialValue: 0
+                  rules: []
                 })(
                   <InputNumber
                     style={{ width: '100%' }}
@@ -206,8 +211,7 @@ class InputForm extends Component {
             <Col span={8}>
               <FormItem label={`Blue Square`}>
                 {getFieldDecorator('blueSquare', {
-                  rules: [],
-                  initialValue: 0
+                  rules: []
                 })(
                   <InputNumber
                     style={{ width: '100%' }}
@@ -224,8 +228,7 @@ class InputForm extends Component {
             <Col span={8}>
               <FormItem label={`Yellow Square`}>
                 {getFieldDecorator('yellowSquare', {
-                  rules: [],
-                  initialValue: 0
+                  rules: []
                 })(
                   <InputNumber
                     style={{ width: '100%' }}
@@ -244,8 +247,7 @@ class InputForm extends Component {
             <Col span={8}>
               <FormItem label={`Red Triangle`}>
                 {getFieldDecorator('redTriangle', {
-                  rules: [],
-                  initialValue: 0
+                  rules: []
                 })(
                   <InputNumber
                     style={{ width: '100%' }}
@@ -262,8 +264,7 @@ class InputForm extends Component {
             <Col span={8}>
               <FormItem label={`Blue Triangle`}>
                 {getFieldDecorator('blueTriangle', {
-                  rules: [],
-                  initialValue: 0
+                  rules: []
                 })(
                   <InputNumber
                     style={{ width: '100%' }}
@@ -280,8 +281,7 @@ class InputForm extends Component {
             <Col span={8}>
               <FormItem label={`Yellow Triangle`}>
                 {getFieldDecorator('yellowTriangle', {
-                  rules: [],
-                  initialValue: 0
+                  rules: []
                 })(
                   <InputNumber
                     style={{ width: '100%' }}
@@ -300,8 +300,7 @@ class InputForm extends Component {
             <Col span={8}>
               <FormItem label={`Red Circle`}>
                 {getFieldDecorator('redCircle', {
-                  rules: [],
-                  initialValue: 0
+                  rules: []
                 })(
                   <InputNumber
                     style={{ width: '100%' }}
@@ -318,8 +317,7 @@ class InputForm extends Component {
             <Col span={8}>
               <FormItem label={`Blue Circle`}>
                 {getFieldDecorator('blueCircle', {
-                  rules: [],
-                  initialValue: 0
+                  rules: []
                 })(
                   <InputNumber
                     style={{ width: '100%' }}
@@ -336,8 +334,7 @@ class InputForm extends Component {
             <Col span={8}>
               <FormItem label={`Yellow Circle`}>
                 {getFieldDecorator('yellowCircle', {
-                  rules: [],
-                  initialValue: 0
+                  rules: []
                 })(
                   <InputNumber
                     style={{ width: '100%' }}
